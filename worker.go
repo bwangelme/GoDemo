@@ -40,7 +40,7 @@ func worker(wg *sync.WaitGroup, dir string, file os.FileInfo) {
 func main() {
 	var wg sync.WaitGroup
 
-	dir := "ml-latest-small"
+	dir := "data"
 	files, err := ioutil.ReadDir(dir)
 	if err != nil {
 		log.Fatal(err)
