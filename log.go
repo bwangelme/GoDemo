@@ -30,10 +30,6 @@ func main() {
 	// %.1s 输出第一位的字符
 	fmt.Printf("%.1s\n", logging.CRITICAL)
 
-	// 切片的end 不能超过 slice 的长度
-	i := []int{1, 2, 3, 4, 5}
-	fmt.Println(i[2:])
-
 	// TODO 为什么这两个日志输出前面会有个时间
 	// 可能是 log.Flag 的原因
 	log.Debugf("%s", "abc")
