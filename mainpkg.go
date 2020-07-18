@@ -1,7 +1,7 @@
 package main
 
 import (
-	"Sync/pkg"
+	"bwdemo/pkg"
 )
 
 func main() {
