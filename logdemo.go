@@ -8,9 +8,9 @@ import (
 	"github.com/op/go-logging"
 )
 
-const LogFilename = "/tmp/abc.log"
+const LogFilename = "/tmp/abc.logger"
 
-var log = logging.MustGetLogger("example")
+var logger = logging.MustGetLogger("example")
 
 var format = logging.MustStringFormatter(
 	`%{color}%{time:15:04:05.000} %{shortfunc} ▶ %{level:.4s} %{id:03x}%{color:reset} %{message}`,
@@ -31,9 +31,9 @@ func main() {
 	fmt.Printf("%.1s\n", logging.CRITICAL)
 
 	// TODO 为什么这两个日志输出前面会有个时间
-	// 可能是 log.Flag 的原因
-	log.Debugf("%s", "abc")
-	log.Infof("%s", "abcd")
+	// 可能是 logger.Flag 的原因
+	logger.Debugf("%s", "abc")
+	logger.Infof("%s", "abcd")
 
 	// 创建日志写入的文件
 	fd, _ := os.Create(LogFilename)
@@ -49,10 +49,10 @@ func main() {
 
 	logging.SetBackend(backend1Leveled, backend2Formatter)
 
-	log.Debugf("debug %s", Password("secret"))
-	log.Info("info")
-	log.Notice("notice")
-	log.Warning("warning")
-	log.Error("err")
-	log.Critical("crit")
+	logger.Debugf("debug %s", Password("secret"))
+	logger.Info("info")
+	logger.Notice("notice")
+	logger.Warning("warning")
+	logger.Error("err")
+	logger.Critical("crit")
 }
