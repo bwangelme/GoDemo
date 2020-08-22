@@ -1,7 +1,4 @@
 
-# Created by https://www.gitignore.io/api/go
-# Edit at https://www.gitignore.io/?templates=go
-
 ### Go ###
 # Binaries for programs and plugins
 *.exe
@@ -22,5 +19,3 @@
 ### Go Patch ###
 /vendor/
 /Godeps/
-
-# End of https://www.gitignore.io/api/go
