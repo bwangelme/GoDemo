@@ -19,6 +19,6 @@ require (
 )
 
 replace (
-	github.com/getsentry/raven-go => /Users/michaeltsui/Github/Golang/raven-go
-	github.com/gin-gonic/gin => /Users/michaeltsui/Github/Golang/gin
+	github.com/getsentry/raven-go => /home/xuyundong/Github/Golang/raven-go
+	github.com/gin-gonic/gin => /home/xuyundong/Github/Golang/gin
 )
