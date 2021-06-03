@@ -13,6 +13,8 @@ require (
 	github.com/go-redis/redis/v8 v8.0.0-beta.7
 	github.com/olivere/elastic/v7 v7.0.15
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
+	github.com/pkg/errors v0.9.1
+	github.com/tidwall/gjson v1.8.0
 	golang.org/x/sys v0.0.0-20200625212154-ddb9806d33ae // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
