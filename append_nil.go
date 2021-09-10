@@ -11,5 +11,6 @@ func main() {
 	var a []*Span
 	fmt.Println(a)
 	fmt.Println(append(a, &Span{2}))
+	fmt.Println(append(a, nil))
 	fmt.Println(a)
 }
