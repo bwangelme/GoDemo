@@ -12,7 +12,7 @@ func main() {
 	ctx := context.Background()
 
 	rdb := redis.NewClient(&redis.Options{
-		Addr: ":6379",
+		Addr:     ":6379",
 		PoolSize: 40,
 	})
 
