@@ -24,3 +24,5 @@ replace (
 	github.com/gin-gonic/gin => ../gin
 	github.com/go-redis/redis/v8 => ../redis
 )
+
+// replace github.com/go-redis/redis/v8 => /home/xuyundong/Github/Golang/redis-1
