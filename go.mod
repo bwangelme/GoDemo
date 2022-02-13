@@ -15,6 +15,7 @@ require (
 	github.com/olivere/elastic/v7 v7.0.15
 	github.com/op/go-logging v0.0.0-20160315200505-970db520ece7
 	github.com/pkg/errors v0.9.1
+	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tidwall/gjson v1.9.3
 )
