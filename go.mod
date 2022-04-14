@@ -7,7 +7,6 @@ require (
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-gonic/gin v1.7.0
-	github.com/go-playground/validator/v10 v10.3.0 // indirect
 	github.com/go-redis/redis/v8 v8.11.0
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
@@ -20,10 +19,10 @@ require (
 	github.com/tidwall/gjson v1.9.3
 )
 
-replace (
-	github.com/getsentry/raven-go => ../raven-go
-	github.com/gin-gonic/gin => ../gin
-	github.com/go-redis/redis/v8 => ../redis
-)
+//replace (
+//	github.com/getsentry/raven-go => ../raven-go
+//	github.com/gin-gonic/gin => ../gin
+//	github.com/go-redis/redis/v8 => ../redis
+//)
 
 // replace github.com/go-redis/redis/v8 => /home/xuyundong/Github/Golang/redis-1
