@@ -17,28 +17,90 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-var (
-	SERVICE_DISCOVER_START_TIMEOUT = 10 * time.Second
-)
-
 type ServiceDiscover struct {
-	zkPath  string
-	servers []string
+	basicPath string
+	servers   []string
 
 	conn     *zk.Conn
 	zkEvents <-chan zk.Event
 
-	appMap map[string]int
+	appMap     map[string]uint8
+	serviceMap map[string]uint8
 
 	stop      chan struct{}
 	cleanUpWG sync.WaitGroup
-	err       chan error
 
 	sync.Mutex
 }
 
-func (sd *ServiceDiscover) watchService(servicePath string) {
-	// TODO
+func (sd *ServiceDiscover) watchService(appName, serviceName string) {
+	servicePath := fmt.Sprintf("%v/%v", appName, serviceName)
+
+	sd.Lock()
+	if _, ok := sd.serviceMap[servicePath]; ok {
+		sd.Unlock()
+		return
+	}
+	sd.serviceMap[servicePath] = 1
+	sd.Unlock()
+
+	zkPath := fmt.Sprintf("%v/%v", sd.basicPath, servicePath)
+	defer func() {
+		sd.Lock()
+		delete(sd.serviceMap, servicePath)
+		sd.Unlock()
+
+		logrus.Infof("[service] Cancel watch service path %s", zkPath)
+		sd.cleanUpWG.Done()
+	}()
+
+	sd.cleanUpWG.Add(1)
+	logrus.Infof("[service] begin to watch service %s", servicePath)
+
+	for {
+		var ch <-chan zk.Event
+		var err error
+		var entrypoints []string
+
+		for retry := 0; retry < 3; retry++ {
+			entrypoints, _, ch, err = sd.conn.ChildrenW(zkPath)
+			if err == nil {
+				break
+			}
+
+			if err == zk.ErrNoNode {
+				logrus.Infof("[service] %s not exist, cancel watch", zkPath)
+				return
+			}
+
+			logrus.Errorf("watch app failed: %s, retry after 3 seconds", err)
+			time.Sleep(3 * time.Second)
+		}
+
+		if err != nil {
+			logrus.Errorf("watch service failed %s, stop watching", zkPath)
+			return
+		}
+
+		for _, entrypoint := range entrypoints {
+			zkPath := fmt.Sprintf("%v/%v/%v/%v", sd.basicPath, appName, serviceName, entrypoint)
+			data, _, err := sd.conn.Get(zkPath)
+			if err != nil {
+				logrus.Errorf("Get %v data failed: %v", zkPath, err)
+			}
+			fmt.Println(appName, serviceName, entrypoint)
+			fmt.Println(string(data))
+		}
+
+		select {
+		case <-ch:
+			logrus.Debugf("[service] %s changed, refresh watch info", zkPath)
+			continue
+		case <-sd.stop:
+			logrus.Infof("Stop goroutine watch service %v", servicePath)
+			return
+		}
+	}
 }
 
 func (sd *ServiceDiscover) watchApp(appname string) {
@@ -50,18 +112,18 @@ func (sd *ServiceDiscover) watchApp(appname string) {
 	sd.appMap[appname] = 1
 	sd.Unlock()
 
-	zkPath := fmt.Sprintf("%v/%v", sd.zkPath, appname)
+	zkPath := fmt.Sprintf("%v/%v", sd.basicPath, appname)
 	defer func() {
 		sd.Lock()
 		delete(sd.appMap, appname)
 		sd.Unlock()
 
-		logrus.Infof("Cancel watch app path %s", zkPath)
+		logrus.Infof("Cancel watch app %s", appname)
 		sd.cleanUpWG.Done()
 	}()
 
 	sd.cleanUpWG.Add(1)
-	logrus.Infof("begin to watch %s", appname)
+	logrus.Infof("[app] begin to watch %s", appname)
 
 	for {
 		var ch <-chan zk.Event
@@ -75,7 +137,7 @@ func (sd *ServiceDiscover) watchApp(appname string) {
 			}
 
 			if err == zk.ErrNoNode {
-				logrus.Infof("app %s is not exist, cancel watch", zkPath)
+				logrus.Infof("[app] %s is not exist, cancel watch", zkPath)
 				return
 			}
 			logrus.Errorf("watch app failed: %s", err)
@@ -88,15 +150,15 @@ func (sd *ServiceDiscover) watchApp(appname string) {
 		}
 
 		for _, serviceName := range serviceNames {
-			servicePath := fmt.Sprintf("%v/%v/%v", sd.zkPath, appname, serviceName)
-			go sd.watchService(servicePath)
+			go sd.watchService(appname, serviceName)
 		}
 
 		select {
 		case <-ch:
-			logrus.Infof("%s changed, refresh watch info", zkPath)
+			logrus.Debugf("[app] %s changed, refresh watch info", zkPath)
 			continue
 		case <-sd.stop:
+			logrus.Infof("Stop goroutine watchapp %v", appname)
 			return
 		}
 
@@ -115,7 +177,7 @@ func (sd *ServiceDiscover) watchAll() {
 
 	for {
 		for retry := 0; retry < 3; retry++ {
-			appNames, _, ch, err = sd.conn.ChildrenW(sd.zkPath)
+			appNames, _, ch, err = sd.conn.ChildrenW(sd.basicPath)
 			if err == nil {
 				// watch path 成功，跳出 retry loop
 				break
@@ -123,29 +185,30 @@ func (sd *ServiceDiscover) watchAll() {
 
 			if err == zk.ErrNoNode {
 				sd.stop <- struct{}{}
-				sd.err <- xerrors.Errorf("watch path %s not exist: %s", sd.zkPath, err)
+				logrus.Fatalf("watch path %s not exist: %s", sd.basicPath, err)
 				return
 			}
 
-			logrus.Errorf("watch path failed: %v, retry after 3 seconds", err)
+			logrus.Errorf("[all] watch path failed: %v, retry after 3 seconds", err)
 			time.Sleep(3 * time.Second)
 		}
 
 		if err != nil {
 			sd.stop <- struct{}{}
-			sd.err <- xerrors.Errorf("watch path %s failed: %s", sd.zkPath, err)
+			logrus.Fatalf("[all] watch path %s failed: %s", sd.basicPath, err)
 			return
 		}
 
 		for _, appName := range appNames {
 			go sd.watchApp(appName)
 		}
-		sd.err <- nil
 
 		select {
 		case <-ch:
+			logrus.Debugf("[all] %s changed, refresh watch info", sd.basicPath)
 			continue
 		case <-sd.stop:
+			logrus.Info("[all] stop watchall goroutine")
 			return
 		}
 
@@ -158,7 +221,6 @@ func (sd *ServiceDiscover) startZKSentinel() {
 	// TODO
 	sd.cleanUpWG.Add(1)
 	logrus.Info("Start ZK Sentinel")
-	sd.err <- nil
 
 	for {
 		select {
@@ -172,25 +234,9 @@ func (sd *ServiceDiscover) startZKSentinel() {
 
 //StartServer
 // 启动服务发现 Server
-func (sd *ServiceDiscover) StartServer() error {
-	workerCnt := 2
-
+func (sd *ServiceDiscover) StartServer() {
 	go sd.startZKSentinel()
 	go sd.watchAll()
-
-	startTimeout := SERVICE_DISCOVER_START_TIMEOUT / time.Duration(workerCnt)
-	for cnt := 0; cnt < workerCnt; cnt++ {
-		select {
-		case <-time.After(startTimeout):
-			return xerrors.New("Start discover server timeout")
-		case err := <-sd.err:
-			if err != nil {
-				return err
-			}
-		}
-	}
-
-	return nil
 }
 
 func newServiceDiscover(zkServers []string, pathPrefix string) (*ServiceDiscover, error) {
@@ -213,13 +259,13 @@ func newServiceDiscover(zkServers []string, pathPrefix string) (*ServiceDiscover
 	}
 
 	return &ServiceDiscover{
-		zkPath:   pathPrefix,
-		servers:  zkServers,
-		zkEvents: ch,
-		appMap:   make(map[string]int, 0),
-		conn:     conn,
-		err:      make(chan error),
-		stop:     make(chan struct{}),
+		basicPath:  pathPrefix,
+		servers:    zkServers,
+		zkEvents:   ch,
+		appMap:     make(map[string]uint8, 0),
+		serviceMap: make(map[string]uint8, 0),
+		conn:       conn,
+		stop:       make(chan struct{}),
 	}, nil
 }
 
@@ -238,12 +284,9 @@ func main() {
 	if err != nil {
 		logrus.Fatalf("init service discover failed: %v", err)
 	}
-	err = sd.StartServer()
-	if err != nil {
-		logrus.Fatalf("start service discover server failed: %v", err)
-	}
+	sd.StartServer()
 	logrus.Info("Start Service Discover")
 
-	fmt.Println(sd)
+	// TODO, TERM信号停掉服务
 	<-ch
 }
