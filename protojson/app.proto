@@ -1,0 +1,10 @@
+syntax = "proto3";
+
+package apppb;
+
+option go_package = "./apppb";
+
+
+message App {
+  int64 id = 1;
+}
