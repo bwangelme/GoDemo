@@ -8,7 +8,7 @@ require (
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-gonic/gin v1.7.0
 	github.com/go-redis/redis/v8 v8.11.0
-	github.com/go-zookeeper/zk v1.0.3 // indirect
+	github.com/go-zookeeper/zk v1.0.3
 	github.com/json-iterator/go v1.1.10 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.1 // indirect
@@ -18,6 +18,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/tidwall/gjson v1.9.3
+	google.golang.org/protobuf v1.23.0
 )
 
 //replace (
