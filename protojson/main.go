@@ -13,5 +13,6 @@ func main() {
 	err := protojson.Unmarshal(jsonData, &app)
 	fmt.Println(err)
 
+	comparable()
 	fmt.Println(app.Id)
 }
