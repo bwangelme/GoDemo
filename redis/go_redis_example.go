@@ -38,4 +38,7 @@ func main() {
 	}
 	// Output: key value
 	// key2 does not exist
+
+	i, _ := rdb.Info(context.Background()).Result()
+	fmt.Println(i)
 }
