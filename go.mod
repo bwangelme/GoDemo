@@ -6,7 +6,7 @@ require (
 	github.com/certifi/gocertifi v0.0.0-20210507211836-431795d63e8d // indirect
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/getsentry/raven-go v0.2.0
-	github.com/gin-gonic/gin v1.7.0
+	github.com/gin-gonic/gin v1.7.7
 	github.com/go-redis/redis/v8 v8.11.0
 	github.com/go-zookeeper/zk v1.0.3
 	github.com/golang/protobuf v1.5.2
