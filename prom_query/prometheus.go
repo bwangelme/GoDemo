@@ -48,6 +48,11 @@ func ensureMonotonic(buckets buckets) {
 	}
 }
 
+// histogram quantile 的工作原理
+// 1. 所有 bucket 根据 le 排序
+// 2. 根据 total_count * q 算出结果所在的 bucket
+// 3. 结果所在 bucket 中，((bucket+1.le) - bucket.le) * q 算出期望的结果
+// 4. 所以切分的 bucket 越多，算出的结果越准确
 func bucketQuantile(q float64, buckets buckets) float64 {
 	if math.IsNaN(q) {
 		return math.NaN()
