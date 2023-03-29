@@ -10,6 +10,18 @@ import (
 	"time"
 )
 
+func GetHistogramQuantile(vector model.Vector) {
+	// TODO: 将 model.Vector 转换成 bucket, +Inf 应该转换成什么
+	var bs = make([]bucket, 0)
+	for _, sample := range vector {
+		fmt.Println(sample)
+		b := bucket{
+			//upperBound: float64(sample.Metric),
+		}
+		bs = append(bs, b)
+	}
+}
+
 func main() {
 	config := api.Config{
 		Address: "http://localhost:9090",
