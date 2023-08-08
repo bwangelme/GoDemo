@@ -5,6 +5,10 @@
 
 既可以在结构体创建的时候指定默认值
 也可以在结构体 Decode 完成之后，设置默认值
+
+## 参考链接
+
+- https://github.com/go-yaml/yaml/issues/165#issuecomment-727092641
 */
 package main
 
