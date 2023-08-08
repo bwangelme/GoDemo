@@ -1,0 +1,16 @@
+application: snowave
+runtime: golang
+services:
+  - interface: linaewen.fdoulist
+    handler: services/api/thrift.go
+    type: thrift
+use_services:
+  - app: fm
+    target_path: .
+    version: 6b15b80
+  - app: music
+    target_path: .
+    version: e89b497be9ef0fb932d5e543ed866f920780750f
+  - app: pony
+    target_path: .
+    version: c5b2e21
