@@ -29,7 +29,7 @@ type UseService struct {
 
 // UnmarshalYAML
 //
-//	此程序演示了，在 Decode 之前设置 Type 字段的默认值为 thrift
+//	此函数演示了，在 Decode 之前设置 Type 字段的默认值为 thrift
 func (u *UseService) UnmarshalYAML(value *yaml.Node) error {
 	type tmp UseService
 	ru := tmp{
@@ -52,7 +52,10 @@ type Service struct {
 
 // UnmarshalYAML
 //
-//	此程序演示了更复杂的情况, Name 字段的默认值是根据 Interface 的值来设置的
+//	此函数演示了更复杂的情况, Name 字段的默认值是根据 Interface 的值来设置的
+//
+// Name 是 Interface 中 . 分割的最后一段
+// 如果 Interface 中没有 . , 这 Name 是 Interface
 func (s *Service) UnmarshalYAML(value *yaml.Node) error {
 	type tmp Service
 	rs := tmp{}
@@ -61,12 +64,10 @@ func (s *Service) UnmarshalYAML(value *yaml.Node) error {
 		return errors.Wrap(err, "Service: failed to unmarshal")
 	}
 
-	if !strings.Contains(rs.Interface, ".") {
-		return errors.New("Service: invalid Interface value")
-	}
-
 	if rs.Name == "" {
-		rs.Name = strings.Split(rs.Interface, ".")[0]
+		// 注意这里，无论 rs.Interface 的值是什么， tokens 的长度一定 >= 1, 所以 tokens[len(tokens)-1] 不会 Panic
+		tokens := strings.Split(rs.Interface, ".")
+		rs.Name = tokens[len(tokens)-1]
 	}
 
 	*s = Service(rs)
