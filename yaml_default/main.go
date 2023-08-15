@@ -22,20 +22,22 @@ import (
 )
 
 type UseService struct {
-	App        string `yaml:"app,omitempty"`
-	TargetPath string `yaml:"target_path"`
-	Type       string `yaml:"type,omitempty"`
-	Version    string `yaml:"version"`
+	App     string `yaml:"app,omitempty"`
+	Type    string `yaml:"type,omitempty"`
+	Version string `yaml:"version"`
 }
 
+// UnmarshalYAML
+//
+//	此程序演示了，在 Decode 之前设置 Type 字段的默认值为 thrift
 func (u *UseService) UnmarshalYAML(value *yaml.Node) error {
-	type rawUseService UseService
-	ru := rawUseService{
+	type tmp UseService
+	ru := tmp{
 		Type: "thrift",
 	}
 	err := value.Decode(&ru)
 	if err != nil {
-		return errors.Wrap(err, "rawUseService: failed to unmarshal")
+		return errors.Wrap(err, "UseService: failed to unmarshal")
 	}
 	*u = UseService(ru)
 	return nil
@@ -48,12 +50,19 @@ type Service struct {
 	Handler   string `yaml:"handler"`
 }
 
+// UnmarshalYAML
+//
+//	此程序演示了更复杂的情况, Name 字段的默认值是根据 Interface 的值来设置的
 func (s *Service) UnmarshalYAML(value *yaml.Node) error {
 	type tmp Service
 	rs := tmp{}
 	err := value.Decode(&rs)
 	if err != nil {
-		return errors.Wrap(err, "rawUseService: failed to unmarshal")
+		return errors.Wrap(err, "Service: failed to unmarshal")
+	}
+
+	if !strings.Contains(rs.Interface, ".") {
+		return errors.New("Service: invalid Interface value")
 	}
 
 	if rs.Name == "" {
@@ -78,9 +87,17 @@ func main() {
 	if err != nil {
 		log.Fatalln(err)
 	}
+
+	// 输出
+	//linaewen linaewen.fdoulist
 	for _, svc := range config.Services {
 		fmt.Println(svc.Name, svc.Interface)
 	}
+
+	// 输出
+	//fm grpc
+	//music thrift
+	//pony thrift
 	for _, svc := range config.UseServices {
 		fmt.Println(svc.App, svc.Type)
 	}
