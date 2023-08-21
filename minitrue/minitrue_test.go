@@ -2,12 +2,16 @@ package main
 
 import (
 	"github.com/stretchr/testify/assert"
+	"net/http"
 	"testing"
 )
 
 func TestCond(t *testing.T) {
 	assert.Equal(t, 1, Cond(true, 1, 2))
 	assert.Equal(t, 2, Cond(false, 1, 2))
+
+	var req *http.Request
+	assert.Equal(t, http.MethodGet, Cond(req == nil, http.MethodGet, http.MethodPost))
 }
 
 func TestOr(t *testing.T) {
@@ -18,4 +22,5 @@ func TestOr(t *testing.T) {
 	assert.Equal(t, 1, Or(1))
 	assert.Equal(t, 2, Or(0, 2))
 	assert.Equal(t, 3, Or(0, 0, 3))
+
 }

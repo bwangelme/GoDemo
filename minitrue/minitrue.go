@@ -27,13 +27,11 @@ func Or[T comparable](vals ...T) T {
 }
 
 func main() {
-	var req *http.Request
 	var req1 = &http.Request{
 		Method: http.MethodPost,
 	}
-	res := Cond(
-		req == nil, http.MethodGet, http.MethodPost,
-	)
+	var req *http.Request
+	res := Cond(req == nil, http.MethodGet, http.MethodPost)
 	fmt.Println(res, reflect.TypeOf(res))
 
 	a := Or(req, req1)
