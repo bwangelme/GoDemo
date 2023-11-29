@@ -4,6 +4,7 @@ go 1.20
 
 require (
 	github.com/VictoriaMetrics/metricsql v0.64.0
+	github.com/apache/thrift v0.17.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-gonic/gin v1.9.1
