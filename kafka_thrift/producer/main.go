@@ -2,7 +2,7 @@ package main
 
 import (
 	"context"
-	kafka "github.com/segmentio/kafka-go"
+	"github.com/segmentio/kafka-go"
 	"log"
 	"time"
 )
