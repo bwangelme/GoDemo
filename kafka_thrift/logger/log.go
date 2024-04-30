@@ -10,5 +10,8 @@ var (
 
 func init() {
 	L = logrus.New()
-	L.SetFormatter(&logrus.TextFormatter{})
+	L.SetFormatter(&logrus.TextFormatter{
+		TimestampFormat: "01-02/15:04:05",
+		FullTimestamp:   true,
+	})
 }
