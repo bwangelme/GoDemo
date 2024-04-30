@@ -2,35 +2,42 @@ package main
 
 import (
 	"bwdemo/kafka_thrift/logger"
-	"context"
-	"github.com/segmentio/kafka-go"
-	"log"
-	"time"
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
 
 func main() {
-	// to produce messages
+	p, err := kafka.NewProducer(&kafka.ConfigMap{
+		"bootstrap.servers": "localhost:9092",
+	})
+	if err != nil {
+		panic(err)
+	}
+
+	defer p.Close()
+
+	// Delivery report handler for produced messages
+	go func() {
+		for e := range p.Events() {
+			switch ev := e.(type) {
+			case *kafka.Message:
+				if ev.TopicPartition.Error != nil {
+					logger.L.Warningf("Delivery failed: %v\n", ev.TopicPartition)
+				} else {
+					logger.L.Infof("Delivered message to %v\n", ev.TopicPartition)
+				}
+			}
+		}
+	}()
+
+	// Produce messages to topic (asynchronously)
 	topic := "lazycat"
-	partition := 0
-
-	conn, err := kafka.DialLeader(context.Background(), "tcp", "localhost:9092", topic, partition)
-	if err != nil {
-		log.Fatal("failed to dial leader:", err)
+	for _, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
+		p.Produce(&kafka.Message{
+			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
+			Value:          []byte(word),
+		}, nil)
 	}
 
-	conn.SetWriteDeadline(time.Now().Add(10 * time.Second))
-	_, err = conn.WriteMessages(
-		kafka.Message{Value: []byte("one!")},
-		kafka.Message{Value: []byte("two!")},
-		kafka.Message{Value: []byte("three!")},
-	)
-	if err != nil {
-		log.Fatal("failed to write messages:", err)
-	}
-	logger.L.Info("write message to kafka")
-
-	if err := conn.Close(); err != nil {
-		log.Fatal("failed to close writer:", err)
-	}
-
+	// Wait for message deliveries before shutting down
+	p.Flush(15 * 1000)
 }
