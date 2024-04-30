@@ -3,7 +3,6 @@ package main
 import (
 	"bwdemo/kafka_thrift/logger"
 	"context"
-	"fmt"
 	"github.com/segmentio/kafka-go"
 	"github.com/sirupsen/logrus"
 	"log"
@@ -32,17 +31,17 @@ func main() {
 
 	defer reader.Close()
 
-	fmt.Println("start consuming ... !!")
+	logger.L.Info("start consuming ... !!")
 	for {
 		m, err := reader.ReadMessage(context.Background())
 		if err != nil {
 			log.Fatalln(err)
 		}
-		logger.L.Info("message", logrus.WithFields(map[string]interface{}{
+		logger.L.WithFields(logrus.Fields{
 			"topic":     m.Topic,
 			"partition": m.Partition,
 			"offset":    m.Offset,
 			"value":     string(m.Value),
-		}))
+		}).Infof("message")
 	}
 }

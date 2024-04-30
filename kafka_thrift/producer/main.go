@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bwdemo/kafka_thrift/logger"
 	"context"
 	"github.com/segmentio/kafka-go"
 	"log"
@@ -26,8 +27,10 @@ func main() {
 	if err != nil {
 		log.Fatal("failed to write messages:", err)
 	}
+	logger.L.Info("write message to kafka")
 
 	if err := conn.Close(); err != nil {
 		log.Fatal("failed to close writer:", err)
 	}
+
 }
