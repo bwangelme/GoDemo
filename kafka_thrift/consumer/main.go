@@ -1,47 +1,40 @@
 package main
 
 import (
-	"bwdemo/kafka_thrift/logger"
-	"context"
-	"github.com/segmentio/kafka-go"
-	"github.com/sirupsen/logrus"
-	"log"
-	"strings"
+	"fmt"
+	"time"
+
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 )
 
-func getKafkaReader(kafkaURL, topic, groupID string) *kafka.Reader {
-	brokers := strings.Split(kafkaURL, ",")
-	return kafka.NewReader(kafka.ReaderConfig{
-		Brokers:     brokers,
-		GroupID:     groupID,
-		Topic:       topic,
-		MinBytes:    10e3, // 10KB
-		MaxBytes:    10e6, // 10MB
-		StartOffset: kafka.LastOffset,
-	})
-}
-
 func main() {
-	// get kafka reader using environment variables.
-	kafkaURL := "localhost:9092"
-	topic := "lazycat"
-	groupID := "thrift_consumer"
 
-	reader := getKafkaReader(kafkaURL, topic, groupID)
+	c, err := kafka.NewConsumer(&kafka.ConfigMap{
+		"bootstrap.servers": "localhost",
+		"group.id":          "thrift_consumer",
+		"auto.offset.reset": "earliest",
+	})
 
-	defer reader.Close()
-
-	logger.L.Info("start consuming ... !!")
-	for {
-		m, err := reader.ReadMessage(context.Background())
-		if err != nil {
-			log.Fatalln(err)
-		}
-		logger.L.WithFields(logrus.Fields{
-			"topic":     m.Topic,
-			"partition": m.Partition,
-			"offset":    m.Offset,
-			"value":     string(m.Value),
-		}).Infof("message")
+	if err != nil {
+		panic(err)
 	}
+
+	c.SubscribeTopics([]string{"lazycat"}, nil)
+
+	// A signal handler or similar could be used to set this to false to break the loop.
+	run := true
+
+	for run {
+		msg, err := c.ReadMessage(time.Second)
+		if err == nil {
+			fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
+		} else if !err.(kafka.Error).IsTimeout() {
+			// The client will automatically try to recover from all errors.
+			// Timeout is not considered an error because it is raised by
+			// ReadMessage in absence of messages.
+			fmt.Printf("Consumer error: %v (%v)\n", err, msg)
+		}
+	}
+
+	c.Close()
 }
