@@ -8,6 +8,7 @@ import (
 	"os"
 	"os/signal"
 	"syscall"
+	"time"
 )
 
 func main() {
@@ -38,11 +39,7 @@ OuterLoop:
 			}).Infof("get signal")
 			break OuterLoop
 		default:
-			ev := c.Poll(1000)
-			if ev == nil {
-				continue
-			}
-
+			msg, err := c.ReadMessage(time.Second)
 			if err == nil {
 				fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
 			} else if !err.(kafka.Error).IsTimeout() {
