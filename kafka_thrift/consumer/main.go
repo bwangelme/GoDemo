@@ -43,9 +43,12 @@ OuterLoop:
 		default:
 			msg, err := c.ReadMessage(time.Second)
 			if err == nil {
-				se := thrift.NewTDeserializer()
+				de := thrift.NewTDeserializer()
 				entry := rpclog.NewLogEntry()
-				se.Read(context.Background(), entry, msg.Value)
+				err := de.Read(context.Background(), entry, msg.Value)
+				if err != nil {
+					logger.L.Warningf("deserializer log entry failed: %v", err)
+				}
 				logger.L.Infof("logentry %s:%s", entry.Date, entry.Msg)
 			} else if !err.(kafka.Error).IsTimeout() {
 				// The client will automatically try to recover from all errors.
