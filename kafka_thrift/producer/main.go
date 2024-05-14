@@ -1,8 +1,12 @@
 package main
 
 import (
+	"bwdemo/kafka_thrift/gen-go/rpclog"
 	"bwdemo/kafka_thrift/logger"
+	"context"
+	"github.com/apache/thrift/lib/go/thrift"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
+	"time"
 )
 
 func main() {
@@ -31,12 +35,19 @@ func main() {
 
 	// Produce messages to topic (asynchronously)
 	topic := "lazycat"
-	for _, word := range []string{"Welcome", "to", "the", "Confluent", "Kafka", "Golang", "client"} {
-		p.Produce(&kafka.Message{
-			TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
-			Value:          []byte(word),
-		}, nil)
+	entry := rpclog.LogEntry{
+		Msg:  "hello, the server start",
+		Date: time.Now().Format("2006-01-02 15:04:05 -0700"),
 	}
+	se := thrift.NewTSerializer()
+	val, err := se.Write(context.Background(), &entry)
+	if err != nil {
+		logger.L.Warningf("Serialize failed: %v", err)
+	}
+	p.Produce(&kafka.Message{
+		TopicPartition: kafka.TopicPartition{Topic: &topic, Partition: kafka.PartitionAny},
+		Value:          val,
+	}, nil)
 
 	// Wait for message deliveries before shutting down
 	p.Flush(15 * 1000)
