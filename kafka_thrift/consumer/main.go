@@ -59,7 +59,7 @@ OuterLoop:
 				logger.L.Warningf("deserializer log entry failed: %v", err)
 				continue
 			}
-			logger.L.Infof("logentry %s:%s", entry.Date, entry.Msg)
+			logger.L.Infof("log entry %s:%s", entry.Date, entry.Msg)
 		}
 	}
 
