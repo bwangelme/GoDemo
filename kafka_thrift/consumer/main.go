@@ -1,8 +1,10 @@
 package main
 
 import (
+	"bwdemo/kafka_thrift/gen-go/rpclog"
 	"bwdemo/kafka_thrift/logger"
-	"fmt"
+	"context"
+	"github.com/apache/thrift/lib/go/thrift"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 	"github.com/sirupsen/logrus"
 	"os"
@@ -41,12 +43,15 @@ OuterLoop:
 		default:
 			msg, err := c.ReadMessage(time.Second)
 			if err == nil {
-				fmt.Printf("Message on %s: %s\n", msg.TopicPartition, string(msg.Value))
+				se := thrift.NewTDeserializer()
+				entry := rpclog.NewLogEntry()
+				se.Read(context.Background(), entry, msg.Value)
+				logger.L.Infof("logentry %s:%s", entry.Date, entry.Msg)
 			} else if !err.(kafka.Error).IsTimeout() {
 				// The client will automatically try to recover from all errors.
 				// Timeout is not considered an error because it is raised by
 				// ReadMessage in absence of messages.
-				fmt.Printf("Consumer error: %v (%v)\n", err, msg)
+				logger.L.Warningf("Consumer error: %v (%v)\n", err, msg)
 			}
 		}
 	}
