@@ -42,20 +42,24 @@ OuterLoop:
 			break OuterLoop
 		default:
 			msg, err := c.ReadMessage(time.Second)
-			if err == nil {
-				de := thrift.NewTDeserializer()
-				entry := rpclog.NewLogEntry()
-				err := de.Read(context.Background(), entry, msg.Value)
-				if err != nil {
-					logger.L.Warningf("deserializer log entry failed: %v", err)
+			if err != nil {
+				if !err.(kafka.Error).IsTimeout() {
+					// The client will automatically try to recover from all errors.
+					// Timeout is not considered an error because it is raised by
+					// ReadMessage in absence of messages.
+					logger.L.Warningf("Consumer error: %v (%v)\n", err, msg)
 				}
-				logger.L.Infof("logentry %s:%s", entry.Date, entry.Msg)
-			} else if !err.(kafka.Error).IsTimeout() {
-				// The client will automatically try to recover from all errors.
-				// Timeout is not considered an error because it is raised by
-				// ReadMessage in absence of messages.
-				logger.L.Warningf("Consumer error: %v (%v)\n", err, msg)
+				continue
 			}
+
+			de := thrift.NewTDeserializer()
+			entry := rpclog.NewLogEntry()
+			err = de.Read(context.Background(), entry, msg.Value)
+			if err != nil {
+				logger.L.Warningf("deserializer log entry failed: %v", err)
+				continue
+			}
+			logger.L.Infof("logentry %s:%s", entry.Date, entry.Msg)
 		}
 	}
 
