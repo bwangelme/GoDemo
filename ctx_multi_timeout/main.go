@@ -9,7 +9,7 @@ import (
 /**
 本程序测试如果存在多个 timeout, 那个先生效
 
-deadlien time 在前面的那个生效
+deadline time 在前面的那个生效
 */
 
 func Monitor(ctx context.Context, num int) {
