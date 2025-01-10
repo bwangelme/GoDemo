@@ -25,9 +25,12 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/stretchr/testify v1.8.4
 	github.com/tidwall/gjson v1.9.3
+	github.com/wenzhenxi/gorsa v0.0.0-20230530123828-0320cce15d81
 	google.golang.org/grpc v1.58.3
 	google.golang.org/protobuf v1.32.0
 	gopkg.in/yaml.v3 v3.0.1
+	gorm.io/driver/mysql v1.5.7
+	gorm.io/gorm v1.25.11
 	k8s.io/api v0.28.2
 	k8s.io/apimachinery v0.28.2
 	k8s.io/client-go v0.28.2
@@ -71,7 +74,6 @@ require (
 	github.com/leodido/go-urn v1.2.4 // indirect
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/mattn/go-isatty v0.0.19 // indirect
-	github.com/mattn/go-sqlite3 v1.14.22 // indirect
 	github.com/matttproud/golang_protobuf_extensions v1.0.1 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
@@ -101,9 +103,6 @@ require (
 	google.golang.org/genproto/googleapis/rpc v0.0.0-20230711160842-782d3b101e98 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
-	gorm.io/driver/mysql v1.5.7 // indirect
-	gorm.io/driver/sqlite v1.5.6 // indirect
-	gorm.io/gorm v1.25.11 // indirect
 	k8s.io/kube-openapi v0.0.0-20230717233707-2695361300d9 // indirect
 	k8s.io/utils v0.0.0-20230406110748-d93618cff8a2 // indirect
 	sigs.k8s.io/json v0.0.0-20221116044647-bc3834ca7abd // indirect
@@ -118,3 +117,5 @@ require (
 //)
 
 // replace github.com/go-redis/redis/v8 => /home/xuyundong/Github/Golang/redis-1
+
+//replace github.com/wenzhenxi/gorsa => ../gorsa
