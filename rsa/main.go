@@ -61,7 +61,7 @@ func decryptWithPrivateKey(cipherText []byte, privKey *rsa.PrivateKey) ([]byte, 
 	return plainText, nil
 }
 
-func demo() {
+func main() {
 	// 生成 RSA 公私钥对
 	privKey, pubKey, err := generateRSAKeyPair()
 	if err != nil {
