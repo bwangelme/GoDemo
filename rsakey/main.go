@@ -1,22 +1,31 @@
 package main
 
 import (
+	"crypto/rand"
 	"crypto/rsa"
 	"crypto/x509"
 	"encoding/pem"
 	"fmt"
 	"log"
+	"os"
+	"path/filepath"
+
+	"github.com/sirupsen/logrus"
 )
 
 var (
-	pubKey = `-----BEGIN PUBLIC KEY-----
-MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAsD6nqxDi+1bX7feWs+h0thPCbHQ7y3rk6TzXwd2jvCGK17r8LeAX7GhoLDSd2ECOXHZ+Bdu8uRmbox5Z7mWrLJnRge6NmVwBS6mQkNFkA+nEOumQleoPz2PCNbKcHqV/ivZrq2OIwGsKXN6isDL7StutcUyN60ZlbASb8uiP5y5b0rRDhX+o8sndIXx9+yN97T3T4lflDRyKfYpg+jQIXELMsbsXfpdobJhrYoiD+OO3ILheqaYNyJrogsP8kDt0bTXeE3KsOe7ffwz221aQpnfUokuthQai+Z4TVrnlgztC39C/6+d8jUpn1o+S6ClOpPqP9UsW54FVaW8z5jPYoQIDAQAB
------END PUBLIC KEY-----`
+	logger = logrus.New()
 
-	priKey = `-----BEGIN PRIVATE KEY-----
-MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCwPqerEOL7Vtft95az6HS2E8JsdDvLeuTpPNfB3aO8IYrXuvwt4BfsaGgsNJ3YQI5cdn4F27y5GZujHlnuZassmdGB7o2ZXAFLqZCQ0WQD6cQ66ZCV6g/PY8I1spwepX+K9murY4jAawpc3qKwMvtK261xTI3rRmVsBJvy6I/nLlvStEOFf6jyyd0hfH37I33tPdPiV+UNHIp9imD6NAhcQsyxuxd+l2hsmGtiiIP447cguF6ppg3ImuiCw/yQO3RtNd4Tcqw57t9/DPbbVpCmd9SiS62FBqL5nhNWueWDO0Lf0L/r53yNSmfWj5LoKU6k+o/1SxbngVVpbzPmM9ihAgMBAAECggEATvnsmXAKPpWWUikB66GNdy/Yjk/xoYdy/39HsbR3lCy1smE0cvw5zDKnB7QWTVr0UEO6yjZC1fE/OHO32efOMkDFTMOQyTmczQJxaSujdUtyJvIV28/UgNsTootkgSkpQ6ST7+u80njE3oPXhDx8NfnFuYEUEWtstGBGX63OGkoBSkQB0GFlFCxuRmSiz83OH25WL9qmOXdGaeTxvQd3j3yTPAOQMqFpCHBJs20Pg6bKBviEb6FW7spCbY5Unj7HVM/tw+DqVBslULwA2FBTkhk6ScGLuiqDulx7Wpc2R1bdQ/cs1rGVECcTuBgiekOlamOk54FdNqyGFQTqtE1yvwKBgQDnBmhNam6NpRjn1EQx9vr/M1Slt6pKceaWytnOFTVhZqTX0hzxFxRGWzxWNpfGg9oOkGrS5LH+hgrmBGV7JIbvioUZG1FiASrfjkrVGUZj2oqcdj7BheSz7a5xVNe6rC7Ywidw4cunC/CP4HdfTSu/o6TUlUUL78+cZiKiHn58zwKBgQDDTDWKTDiI15rN2XhtT9Je2rfU6jHWbBKrou9OLprK3ZvgJdTiCeTPs3k5CmzWZjzetlBDHX/cH89gfw0boVjK4zYVgQkBr7g7erwGW33gZ57ZYdu8VF3O6F5O0J0dpoyvnnLXbtuGjESWiJHPIxyPOilI/xh6Rq/LQwVwrwQPjwKBgCtgX5sRfbpoojl8+GTtO4lJCP6ocnfR1PrBEY4JG2GzVQYUtExsCel/3d9OFsc2IG4VnYkFWYoxfsBbWPZ7ED7PolfpcilVkMgyvkgum7HJ6bag2P2a9yr1WIh85phtFcqrAZ7HNmah7kQFYERrh+hOgHdNo44vM6ro3l3UHemvAoGAMIUMgDFzkjvOj/nJe47rOvmn1lPg0d7DvLScM5ZMir4H7eY4P3gpyphSM6Otao637LTqt+HqVCvq/5RRE15Aixdr5mfKbwrTAKP7drDgUxIrWuJ/Dwj+zVrZo0cc4bLxHOiGq5M1IvZSS/veDdIxVDwk6afG0wogvqUGAvrYTW0CgYEAiEY37hFTX/ZzqzgWsa/yq45qIlcQKr/JQtsovJqZ1ZzOwbs4b/pt12ehTpoCp5SrdYYX5TuohzQPyyMo60CkEEkaHQpOhqRcwIA6fQZfBET5OrC7R1BYu9GR5CVLUqBv+7votesZ3aJzsIDUTfrmmk3Q9+UT6P7SvL5t8p898jM=
------END PRIVATE KEY-----`
+	PRIVATEKEY_FILE = "private_key.pem"
+	PUBLICKEY_FILE  = "public_key.pem"
 )
+
+func init() {
+	dir, _ := os.Getwd()
+
+	PRIVATEKEY_FILE = filepath.Join(dir, "rsakey", PRIVATEKEY_FILE)
+	PUBLICKEY_FILE = filepath.Join(dir, "rsakey", PUBLICKEY_FILE)
+}
 
 func ParseRSAPrivateKey(data []byte) (*rsa.PrivateKey, error) {
 	// 解码 PEM 数据
@@ -54,21 +63,86 @@ func ParseRSAPublicKey(data []byte) (*rsa.PublicKey, error) {
 	return publicKey.(*rsa.PublicKey), nil
 }
 
+// 生成 RSA 公私钥对
+func generateRSAKeyPair() (*rsa.PrivateKey, *rsa.PublicKey, error) {
+	privKey, err := rsa.GenerateKey(rand.Reader, 2048)
+	if err != nil {
+		logger.Warnf("generateRSAKeyPair failed err=%v", err)
+		return nil, nil, fmt.Errorf("生成 RSA 密钥对失败: %v", err)
+	}
+	return privKey, &privKey.PublicKey, nil
+}
+
+// 将公钥转为 PEM 格式的字符串
+func publicKeyToPEM(pubKey *rsa.PublicKey) error {
+	// 将公钥转换成 pkix 格式
+	pubASN1, err := x509.MarshalPKIXPublicKey(pubKey)
+	if err != nil {
+		logger.Warnf("无法将公钥转换为 ASN.1 格式: %v", err)
+	}
+	// 创建一个文件来保存 PEM 编码的私钥
+	fd, err := os.Create(PUBLICKEY_FILE)
+	if err != nil {
+		logger.Warnf("create file failed, name=%v err=%v", PUBLICKEY_FILE, err)
+		return err
+	}
+	defer fd.Close()
+
+	err = pem.Encode(fd, &pem.Block{
+		Type:  "PUBLIC KEY",
+		Bytes: pubASN1,
+	})
+	if err != nil {
+		logger.Warnf("publick key pem encode failed, err=%v", err)
+		return err
+	}
+	logger.Infof("generate public key into %v", PUBLICKEY_FILE)
+	return nil
+}
+
+// 将私钥转为 PEM 格式的字符串
+func privateKeyToPEM(privKey *rsa.PrivateKey) error {
+	// 将私钥转换成 pkcs#8 格式
+	privASN1, err := x509.MarshalPKCS8PrivateKey(privKey)
+	if err != nil {
+		logger.Warnf("MarshalPKCS8PrivateKey failed, err=%v", err)
+		return err
+	}
+	// 创建一个文件来保存 PEM 编码的私钥
+	fd, err := os.Create(PRIVATEKEY_FILE)
+	if err != nil {
+		logger.Warnf("create file failed, name=%v err=%v", PRIVATEKEY_FILE, err)
+		return err
+	}
+	defer fd.Close()
+
+	err = pem.Encode(fd, &pem.Block{
+		Type:  "PRIVATE KEY",
+		Bytes: privASN1,
+	})
+	if err != nil {
+		logger.Warnf("pem encode failed err=%v", err)
+		return err
+	}
+	logger.Infof("generate private key into %v", PRIVATEKEY_FILE)
+	return nil
+}
+
+func generateKey() {
+	priKey, pubKey, err := generateRSAKeyPair()
+	if err != nil {
+		return
+	}
+	err = privateKeyToPEM(priKey)
+	if err != nil {
+		return
+	}
+	err = publicKeyToPEM(pubKey)
+	if err != nil {
+		return
+	}
+}
+
 func main() {
-	// 解析公钥
-	pubKey, err := ParseRSAPublicKey([]byte(pubKey))
-	if err != nil {
-		log.Fatalf("解析公钥失败: %v", err)
-	}
-
-	// 打印公钥信息
-	fmt.Println(pubKey.E)
-	fmt.Println(pubKey.N)
-
-	privateKey, err := ParseRSAPrivateKey([]byte(priKey))
-	if err != nil {
-		log.Fatalf("解析私钥失败: %v", err)
-	}
-	fmt.Println(privateKey.E)
-	fmt.Println(privateKey.N)
+	generateKey()
 }
