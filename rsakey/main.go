@@ -60,6 +60,8 @@ func ParseRSAPemPrivateKey(data []byte) (*rsa.PrivateKey, error) {
 }
 
 func ParseRSADerPublicKey(data []byte) (*rsa.PublicKey, error) {
+	// RSA 公钥的 PKIX 格式是 X.509 公钥信息的一种编码格式，通常以 DER 或 PEM 格式存储。
+	// 它是标准的公钥信息格式，符合 PKIX（Public Key Infrastructure X.509）规范。
 	publicKey, err := x509.ParsePKIXPublicKey(data)
 	if err != nil {
 		logger.Warnf("parse  pkix public key failed, err=%v", err)
@@ -116,6 +118,9 @@ func publicKeyIntoFile(pubKey *rsa.PublicKey) error {
 	}
 	defer fd.Close()
 
+	// 将 RSA 公钥以 pem 格式存储
+	// PEM 编码（Base64 编码）格式：
+	// 通常以 -----BEGIN PUBLIC KEY----- 开头，-----END PUBLIC KEY----- 结尾。
 	err = pem.Encode(fd, &pem.Block{
 		Type:  "PUBLIC KEY",
 		Bytes: pubASN1,
