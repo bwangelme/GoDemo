@@ -32,7 +32,7 @@ PKCS#1 对 RSA 私钥进行了详细定义，它使用标准的二进制编码�
 
 典型格式：
 RSA 私钥（PKCS#1 格式）：通常以 PEM 格式表示，开始于 -----BEGIN RSA PRIVATE KEY----- 和 -----END RSA PRIVATE KEY-----。
-RSA 公钥（PKCS#1 格式）：通常以 PEM 格式表示，开始于 -----BEGIN PUBLIC KEY----- 和 -----END PUBLIC KEY-----。
+RSA 公钥（PKCS#8 格式）：通常以 PEM 格式表示，开始于 -----BEGIN PUBLIC KEY----- 和 -----END PUBLIC KEY-----。
 应用：
 RSA 密钥生成和使用中，如数字签名、加密数据、密钥交换等操作。
 
