@@ -260,5 +260,8 @@ func parseRSAKey() {
 
 func main() {
 	//generateKey()
-	parseRSAKey()
+	//parseRSAKey()
+	//printPKCS1RSAKey()
+	//printPKCS8PrivateKey()
+	printPKIXPublicKey()
 }
