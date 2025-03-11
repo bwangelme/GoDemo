@@ -8,6 +8,7 @@ require (
 	github.com/apache/thrift v0.17.0
 	github.com/confluentinc/confluent-kafka-go/v2 v2.3.0
 	github.com/dgrijalva/jwt-go v3.2.0+incompatible
+	github.com/emirpasic/gods v1.18.1
 	github.com/envoyproxy/go-control-plane v0.12.0
 	github.com/getsentry/raven-go v0.2.0
 	github.com/gin-gonic/gin v1.9.1
