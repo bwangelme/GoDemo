@@ -1,0 +1,252 @@
+main.main STEXT size=176 args=0x0 locals=0x188 funcid=0x0 align=0x0
+        0x0000 00000 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  TEXT    main.main(SB), ABIInternal, $400-0
+        0x0000 00000 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  MOVD    16(g), R16
+        0x0004 00004 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $0, $-2
+        0x0004 00004 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  SUB     $272, RSP, R17
+        0x0008 00008 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  CMP     R16, R17
+        0x000c 00012 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  BLS     160
+        0x0010 00016 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $0, $-1
+        0x0010 00016 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  SUB     $400, RSP, R20
+        0x0014 00020 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  STP     (R29, R30), -8(R20)
+        0x0018 00024 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $0, $-2
+        0x0018 00024 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  MOVD    R20, RSP
+        0x001c 00028 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $0, $-1
+        0x001c 00028 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  SUB     $8, RSP, R29
+        0x0020 00032 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  FUNCDATA        $0, gclocals·ykHN0vawYuq1dUW4zEe2gA==(SB)
+        0x0020 00032 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  FUNCDATA        $1, gclocals·MxXDhV4rNFJBGgpTDW5ijQ==(SB)
+        0x0020 00032 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  FUNCDATA        $2, main.main.stkobj(SB)
+        0x0020 00032 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  STP     (ZR, ZR), main..autotmp_3-144(SP)
+        0x0024 00036 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  STP     (ZR, ZR), main..autotmp_3-128(SP)
+        0x0028 00040 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  STP     (ZR, ZR), main..autotmp_3-112(SP)
+        0x002c 00044 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  MOVD    $main..autotmp_4-352(SP), R20
+        0x0030 00048 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  PCDATA  $0, $-2
+        0x0030 00048 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  ADR     64, runtime.duffzero+204(R27)(R27)(REG)
+        0x0034 00052 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  STP     (R29, R27), -24(RSP)
+        0x0038 00056 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  SUB     $24, RSP, R29
+        0x003c 00060 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  DUFFZERO        runtime.duffzero(SB)
+        0x0040 00064 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  SUB     $8, RSP, R29
+        0x0044 00068 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  PCDATA  $0, $-1
+        0x0044 00068 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  MOVD    $main..autotmp_4-352(SP), R0
+        0x0048 00072 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  MOVD    R0, main..autotmp_3-128(SP)
+        0x004c 00076 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  PCDATA  $1, $1
+        0x004c 00076 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  CALL    runtime.rand32(SB)
+        0x0050 00080 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:4)  MOVW    R0, main..autotmp_3-132(SP)
+        0x0054 00084 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  MOVD    $main..autotmp_2-96(SP), R20
+        0x0058 00088 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  PCDATA  $0, $-2
+        0x0058 00088 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  ADR     104, runtime.duffzero+232(R27)(R27)(REG)
+        0x005c 00092 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  STP     (R29, R27), -24(RSP)
+        0x0060 00096 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  SUB     $24, RSP, R29
+        0x0064 00100 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  DUFFZERO        runtime.duffzero(SB)
+        0x0068 00104 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  SUB     $8, RSP, R29
+        0x006c 00108 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  PCDATA  $0, $-1
+        0x006c 00108 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  MOVD    $type:map[int]string(SB), R0
+        0x0074 00116 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  MOVD    $main..autotmp_3-144(SP), R1
+        0x0078 00120 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  MOVD    $main..autotmp_2-96(SP), R2
+        0x007c 00124 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  PCDATA  $1, $2
+        0x007c 00124 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  CALL    runtime.mapiterinit(SB)
+        0x0080 00128 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  JMP     140
+        0x0084 00132 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  MOVD    $main..autotmp_2-96(SP), R0
+        0x0088 00136 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  CALL    runtime.mapiternext(SB)
+        0x008c 00140 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  MOVD    main..autotmp_2-96(SP), R1
+        0x0090 00144 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:5)  CBNZ    R1, 132
+        0x0094 00148 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:7)  LDP     -8(RSP), (R29, R30)
+        0x0098 00152 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:7)  ADD     $400, RSP
+        0x009c 00156 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:7)  RET     (R30)
+        0x00a0 00160 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:7)  NOP
+        0x00a0 00160 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $1, $-1
+        0x00a0 00160 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $0, $-2
+        0x00a0 00160 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  MOVD    R30, R3
+        0x00a4 00164 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  CALL    runtime.morestack_noctxt(SB)
+        0x00a8 00168 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  PCDATA  $0, $-1
+        0x00a8 00168 (/Users/zyb/Github/GoDemo/map_iter/map_iter.go:3)  JMP     0
+        0x0000 90 0b 40 f9 f1 43 04 d1 3f 02 10 eb a9 04 00 54  ..@..C..?......T
+        0x0010 f4 43 06 d1 9d fa 3f a9 9f 02 00 91 fd 23 00 d1  .C....?......#..
+        0x0020 ff ff 0f a9 ff ff 10 a9 ff ff 11 a9 f4 a3 00 91  ................
+        0x0030 9b 00 00 10 fd ef 3e a9 fd 63 00 d1 00 00 00 94  ......>..c......
+        0x0040 fd 23 00 d1 e0 a3 00 91 e0 87 00 f9 00 00 00 94  .#..............
+        0x0050 e0 07 01 b9 f4 a3 04 91 9b 00 00 10 fd ef 3e a9  ..............>.
+        0x0060 fd 63 00 d1 00 00 00 94 fd 23 00 d1 00 00 00 90  .c.......#......
+        0x0070 00 00 00 91 e1 e3 03 91 e2 a3 04 91 00 00 00 94  ................
+        0x0080 03 00 00 14 e0 a3 04 91 00 00 00 94 e1 97 40 f9  ..............@.
+        0x0090 a1 ff ff b5 fd fb 7f a9 ff 43 06 91 c0 03 5f d6  .........C...._.
+        0x00a0 e3 03 1e aa 00 00 00 94 d6 ff ff 17 00 00 00 00  ................
+        rel 60+4 t=R_CALLARM64 runtime.duffzero+204
+        rel 76+4 t=R_CALLARM64 runtime.rand32+0
+        rel 100+4 t=R_CALLARM64 runtime.duffzero+232
+        rel 108+8 t=R_ADDRARM64 type:map[int]string+0
+        rel 124+4 t=R_CALLARM64 runtime.mapiterinit+0
+        rel 136+4 t=R_CALLARM64 runtime.mapiternext+0
+        rel 164+4 t=R_CALLARM64 runtime.morestack_noctxt+0
+go:cuinfo.producer.<unlinkable> SDWARFCUINFO dupok size=0
+        0x0000 72 65 67 61 62 69                                regabi
+go:cuinfo.packagename.main SDWARFCUINFO dupok size=0
+        0x0000 6d 61 69 6e                                      main
+main..inittask SNOPTRDATA size=8
+        0x0000 00 00 00 00 00 00 00 00                          ........
+runtime.memequal64·f SRODATA dupok size=8
+        0x0000 00 00 00 00 00 00 00 00                          ........
+        rel 0+8 t=R_ADDR runtime.memequal64+0
+runtime.gcbits.0100000000000000 SRODATA dupok size=8
+        0x0000 01 00 00 00 00 00 00 00                          ........
+type:.namedata.*map[int]string- SRODATA dupok size=17
+        0x0000 00 0f 2a 6d 61 70 5b 69 6e 74 5d 73 74 72 69 6e  ..*map[int]strin
+        0x0010 67                                               g
+type:*map[int]string SRODATA dupok size=56
+        0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0010 fd 58 bc 94 08 08 08 36 00 00 00 00 00 00 00 00  .X.....6........
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00                          ........
+        rel 24+8 t=R_ADDR runtime.memequal64·f+0
+        rel 32+8 t=R_ADDR runtime.gcbits.0100000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*map[int]string-+0
+        rel 48+8 t=R_ADDR type:map[int]string+0
+type:.namedata.*map.bucket[int]string- SRODATA dupok size=24
+        0x0000 00 16 2a 6d 61 70 2e 62 75 63 6b 65 74 5b 69 6e  ..*map.bucket[in
+        0x0010 74 5d 73 74 72 69 6e 67                          t]string
+type:noalg.*map.bucket[int]string SRODATA dupok size=56
+        0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0010 2a 5e fd 13 00 08 08 36 00 00 00 00 00 00 00 00  *^.....6........
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00                          ........
+        rel 32+8 t=R_ADDR runtime.gcbits.0100000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*map.bucket[int]string-+0
+        rel 48+8 t=R_ADDR type:noalg.map.bucket[int]string+0
+runtime.gcbits.00aaaa0200000000 SRODATA dupok size=8
+        0x0000 00 aa aa 02 00 00 00 00                          ........
+type:.namedata.*[8]uint8- SRODATA dupok size=11
+        0x0000 00 09 2a 5b 38 5d 75 69 6e 74 38                 ..*[8]uint8
+type:*[8]uint8 SRODATA dupok size=56
+        0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0010 f8 9a 95 1a 08 08 08 36 00 00 00 00 00 00 00 00  .......6........
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00                          ........
+        rel 24+8 t=R_ADDR runtime.memequal64·f+0
+        rel 32+8 t=R_ADDR runtime.gcbits.0100000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*[8]uint8-+0
+        rel 48+8 t=R_ADDR type:[8]uint8+0
+runtime.gcbits. SRODATA dupok size=0
+type:[8]uint8 SRODATA dupok size=72
+        0x0000 08 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0010 89 18 9c b4 0a 01 01 11 00 00 00 00 00 00 00 00  ................
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0040 08 00 00 00 00 00 00 00                          ........
+        rel 24+8 t=R_ADDR runtime.memequal64·f+0
+        rel 32+8 t=R_ADDR runtime.gcbits.+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*[8]uint8-+0
+        rel 44+4 t=RelocType(-32763) type:*[8]uint8+0
+        rel 48+8 t=R_ADDR type:uint8+0
+        rel 56+8 t=R_ADDR type:[]uint8+0
+type:.namedata.*[8]int- SRODATA dupok size=9
+        0x0000 00 07 2a 5b 38 5d 69 6e 74                       ..*[8]int
+type:noalg.*[8]int SRODATA dupok size=56
+        0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0010 b2 24 38 0a 00 08 08 36 00 00 00 00 00 00 00 00  .$8....6........
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00                          ........
+        rel 32+8 t=R_ADDR runtime.gcbits.0100000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*[8]int-+0
+        rel 48+8 t=R_ADDR type:noalg.[8]int+0
+type:noalg.[8]int SRODATA dupok size=72
+        0x0000 40 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  @...............
+        0x0010 94 48 d7 e9 02 08 08 11 00 00 00 00 00 00 00 00  .H..............
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0040 08 00 00 00 00 00 00 00                          ........
+        rel 32+8 t=R_ADDR runtime.gcbits.+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*[8]int-+0
+        rel 44+4 t=RelocType(-32763) type:noalg.*[8]int+0
+        rel 48+8 t=R_ADDR type:int+0
+        rel 56+8 t=R_ADDR type:[]int+0
+type:.namedata.*[8]string- SRODATA dupok size=12
+        0x0000 00 0a 2a 5b 38 5d 73 74 72 69 6e 67              ..*[8]string
+type:noalg.*[8]string SRODATA dupok size=56
+        0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0010 e3 bf d7 63 00 08 08 36 00 00 00 00 00 00 00 00  ...c...6........
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00                          ........
+        rel 32+8 t=R_ADDR runtime.gcbits.0100000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*[8]string-+0
+        rel 48+8 t=R_ADDR type:noalg.[8]string+0
+runtime.gcbits.5555000000000000 SRODATA dupok size=8
+        0x0000 55 55 00 00 00 00 00 00                          UU......
+type:noalg.[8]string SRODATA dupok size=72
+        0x0000 80 00 00 00 00 00 00 00 78 00 00 00 00 00 00 00  ........x.......
+        0x0010 0c 1c ff 04 02 08 08 11 00 00 00 00 00 00 00 00  ................
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0040 08 00 00 00 00 00 00 00                          ........
+        rel 32+8 t=R_ADDR runtime.gcbits.5555000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*[8]string-+0
+        rel 44+4 t=RelocType(-32763) type:noalg.*[8]string+0
+        rel 48+8 t=R_ADDR type:string+0
+        rel 56+8 t=R_ADDR type:[]string+0
+type:.importpath.. SRODATA dupok size=2
+        0x0000 00 00                                            ..
+type:.namedata.topbits- SRODATA dupok size=9
+        0x0000 00 07 74 6f 70 62 69 74 73                       ..topbits
+type:.namedata.keys- SRODATA dupok size=6
+        0x0000 00 04 6b 65 79 73                                ..keys
+type:.namedata.elems- SRODATA dupok size=7
+        0x0000 00 05 65 6c 65 6d 73                             ..elems
+type:.namedata.overflow- SRODATA dupok size=10
+        0x0000 00 08 6f 76 65 72 66 6c 6f 77                    ..overflow
+type:noalg.map.bucket[int]string SRODATA dupok size=176
+        0x0000 d0 00 00 00 00 00 00 00 d0 00 00 00 00 00 00 00  ................
+        0x0010 8a 14 6e a7 02 08 08 19 00 00 00 00 00 00 00 00  ..n.............
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0040 04 00 00 00 00 00 00 00 04 00 00 00 00 00 00 00  ................
+        0x0050 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0060 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0070 00 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0080 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0090 48 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  H...............
+        0x00a0 00 00 00 00 00 00 00 00 c8 00 00 00 00 00 00 00  ................
+        rel 32+8 t=R_ADDR runtime.gcbits.00aaaa0200000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*map.bucket[int]string-+0
+        rel 44+4 t=RelocType(-32763) type:noalg.*map.bucket[int]string+0
+        rel 48+8 t=R_ADDR type:.importpath..+0
+        rel 56+8 t=R_ADDR type:noalg.map.bucket[int]string+80
+        rel 80+8 t=R_ADDR type:.namedata.topbits-+0
+        rel 88+8 t=R_ADDR type:[8]uint8+0
+        rel 104+8 t=R_ADDR type:.namedata.keys-+0
+        rel 112+8 t=R_ADDR type:noalg.[8]int+0
+        rel 128+8 t=R_ADDR type:.namedata.elems-+0
+        rel 136+8 t=R_ADDR type:noalg.[8]string+0
+        rel 152+8 t=R_ADDR type:.namedata.overflow-+0
+        rel 160+8 t=R_ADDR type:unsafe.Pointer+0
+runtime.memhash64·f SRODATA dupok size=8
+        0x0000 00 00 00 00 00 00 00 00                          ........
+        rel 0+8 t=R_ADDR runtime.memhash64+0
+type:map[int]string SRODATA dupok size=88
+        0x0000 08 00 00 00 00 00 00 00 08 00 00 00 00 00 00 00  ................
+        0x0010 10 c9 8e 73 02 08 08 35 00 00 00 00 00 00 00 00  ...s...5........
+        0x0020 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0030 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0040 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00 00  ................
+        0x0050 08 10 d0 00 04 00 00 00                          ........
+        rel 32+8 t=R_ADDR runtime.gcbits.0100000000000000+0
+        rel 40+4 t=R_ADDROFF type:.namedata.*map[int]string-+0
+        rel 44+4 t=RelocType(-32763) type:*map[int]string+0
+        rel 48+8 t=R_ADDR type:int+0
+        rel 56+8 t=R_ADDR type:string+0
+        rel 64+8 t=R_ADDR type:noalg.map.bucket[int]string+0
+        rel 72+8 t=R_ADDR runtime.memhash64·f+0
+runtime.gcbits.ff00000000000000 SRODATA dupok size=8
+        0x0000 ff 00 00 00 00 00 00 00                          ........
+runtime.gcbits.2c00000000000000 SRODATA dupok size=8
+        0x0000 2c 00 00 00 00 00 00 00                          ,.......
+gclocals·ykHN0vawYuq1dUW4zEe2gA== SRODATA dupok size=8
+        0x0000 03 00 00 00 00 00 00 00                          ........
+gclocals·MxXDhV4rNFJBGgpTDW5ijQ== SRODATA dupok size=26
+        0x0000 03 00 00 00 2c 00 00 00 00 00 00 00 00 00 00 00  ....,...........
+        0x0010 00 b0 00 00 00 00 00 00 ff 00                    ..........
+main.main.stkobj SRODATA static size=56
+        0x0000 03 00 00 00 00 00 00 00 a0 fe ff ff d0 00 00 00  ................
+        0x0010 d0 00 00 00 00 00 00 00 70 ff ff ff 30 00 00 00  ........p...0...
+        0x0020 30 00 00 00 00 00 00 00 a0 ff ff ff 60 00 00 00  0...........`...
+        0x0030 40 00 00 00 00 00 00 00                          @.......
+        rel 20+4 t=R_ADDROFF runtime.gcbits.00aaaa0200000000+0
+        rel 36+4 t=R_ADDROFF runtime.gcbits.2c00000000000000+0
+        rel 52+4 t=R_ADDROFF runtime.gcbits.ff00000000000000+0
