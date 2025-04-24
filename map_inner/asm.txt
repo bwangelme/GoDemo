@@ -1,18 +1,18 @@
 ø> go tool compile -S map_inner/main.go
 
 
-main.main STEXT size=316 args=0x0 locals=0x180 funcid=0x0 align=0x0
+main.main STEXT size=472 args=0x0 locals=0x180 funcid=0x0 align=0x0
         0x0000 00000 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) TEXT    main.main(SB), ABIInternal, $384-0
         0x0000 00000 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) LEAQ    -256(SP), R12
         0x0008 00008 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) CMPQ    R12, 16(R14)
         0x000c 00012 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $0, $-2
-        0x000c 00012 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) JLS     306
+        0x000c 00012 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) JLS     462
         0x0012 00018 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $0, $-1
         0x0012 00018 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PUSHQ   BP
         0x0013 00019 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) MOVQ    SP, BP
         0x0016 00022 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) SUBQ    $376, SP
         0x001d 00029 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) FUNCDATA        $0, gclocals·ykHN0vawYuq1dUW4zEe2gA==(SB)
-        0x001d 00029 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) FUNCDATA        $1, gclocals·MxXDhV4rNFJBGgpTDW5ijQ==(SB)
+        0x001d 00029 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) FUNCDATA        $1, gclocals·sRFbzDWFn8PpTBbw2tk2zQ==(SB)
         0x001d 00029 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) FUNCDATA        $2, main.main.stkobj(SB)
         0x001d 00029 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:4) MOVUPS  X15, main..autotmp_3+232(SP)
         0x0026 00038 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:4) MOVUPS  X15, main..autotmp_3+248(SP)
@@ -27,83 +27,141 @@ main.main STEXT size=316 args=0x0 locals=0x180 funcid=0x0 align=0x0
         0x0061 00097 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:4) PCDATA  $1, $1
         0x0061 00097 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:4) CALL    runtime.rand32(SB)
         0x0066 00102 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:4) MOVL    AX, main..autotmp_3+244(SP)
-        0x006d 00109 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) LEAQ    type:map[int]string(SB), AX
-        0x0074 00116 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) LEAQ    main..autotmp_3+232(SP), BX
-        0x007c 00124 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) MOVL    $1, CX
-        0x0081 00129 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) CALL    runtime.mapassign_fast64(SB)
-        0x0086 00134 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) MOVQ    $5, 8(AX)
-        0x008e 00142 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) CMPL    runtime.writeBarrier(SB), $0
-        0x0095 00149 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) PCDATA  $0, $-2
-        0x0095 00149 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) JEQ     162
-        0x0097 00151 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) MOVQ    (AX), DX
-        0x009a 00154 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) CALL    runtime.gcWriteBarrier1(SB)
-        0x009f 00159 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) MOVQ    DX, (R11)
-        0x00a2 00162 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) LEAQ    go:string."hello"(SB), DX
-        0x00a9 00169 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:7) MOVQ    DX, (AX)
-        0x00ac 00172 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        PCDATA  $0, $-1
-        0x00ac 00172 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        LEAQ    type:map[int]string(SB), AX
-        0x00b3 00179 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        LEAQ    main..autotmp_3+232(SP), BX
-        0x00bb 00187 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        MOVL    $2, CX
-        0x00c0 00192 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        CALL    runtime.mapaccess1_fast64(SB)
-        0x00c5 00197 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    main..autotmp_2+280(SP), DI
-        0x00cd 00205 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        PCDATA  $0, $-2
-        0x00cd 00205 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    -32(DI), DI
-        0x00d1 00209 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        NOP
-        0x00e0 00224 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        DUFFZERO        $331
-        0x00f3 00243 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        PCDATA  $0, $-1
-        0x00f3 00243 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    type:map[int]string(SB), AX
-        0x00fa 00250 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    main..autotmp_3+232(SP), BX
-        0x0102 00258 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    main..autotmp_2+280(SP), CX
-        0x010a 00266 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        PCDATA  $1, $2
-        0x010a 00266 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        CALL    runtime.mapiterinit(SB)
-        0x010f 00271 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        JMP     286
-        0x0111 00273 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    main..autotmp_2+280(SP), AX
-        0x0119 00281 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        CALL    runtime.mapiternext(SB)
-        0x011e 00286 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        CMPQ    main..autotmp_2+280(SP), $0
-        0x0127 00295 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        JNE     273
-        0x0129 00297 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:15)        ADDQ    $376, SP
-        0x0130 00304 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:15)        POPQ    BP
-        0x0131 00305 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:15)        RET
-        0x0132 00306 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:15)        NOP
-        0x0132 00306 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $1, $-1
-        0x0132 00306 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $0, $-2
-        0x0132 00306 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) CALL    runtime.morestack_noctxt(SB)
-        0x0137 00311 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $0, $-1
-        0x0137 00311 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) JMP     0
-        0x0000 4c 8d a4 24 00 ff ff ff 4d 3b 66 10 0f 86 20 01  L..$....M;f... .
+        0x006d 00109 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) LEAQ    type:map[int]string(SB), AX
+        0x0074 00116 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) LEAQ    main..autotmp_3+232(SP), BX
+        0x007c 00124 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) MOVL    $3, CX
+        0x0081 00129 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) CALL    runtime.mapassign_fast64(SB)
+        0x0086 00134 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) MOVQ    $5, 8(AX)
+        0x008e 00142 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) CMPL    runtime.writeBarrier(SB), $0
+        0x0095 00149 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) PCDATA  $0, $-2
+        0x0095 00149 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) JEQ     162
+        0x0097 00151 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) MOVQ    (AX), DX
+        0x009a 00154 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) CALL    runtime.gcWriteBarrier1(SB)
+        0x009f 00159 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) MOVQ    DX, (R11)
+        0x00a2 00162 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) LEAQ    go:string."world"(SB), DX
+        0x00a9 00169 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:5) MOVQ    DX, (AX)
+        0x00ac 00172 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) PCDATA  $0, $-1
+        0x00ac 00172 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) LEAQ    type:map[int]string(SB), AX
+        0x00b3 00179 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) LEAQ    main..autotmp_3+232(SP), BX
+        0x00bb 00187 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) MOVL    $4, CX
+        0x00c0 00192 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) CALL    runtime.mapassign_fast64(SB)
+        0x00c5 00197 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) MOVQ    $1, 8(AX)
+        0x00cd 00205 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) CMPL    runtime.writeBarrier(SB), $0
+        0x00d4 00212 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) PCDATA  $0, $-2
+        0x00d4 00212 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) JEQ     225
+        0x00d6 00214 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) MOVQ    (AX), DX
+        0x00d9 00217 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) CALL    runtime.gcWriteBarrier1(SB)
+        0x00de 00222 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) MOVQ    DX, (R11)
+        0x00e1 00225 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) LEAQ    go:string."!"(SB), DX
+        0x00e8 00232 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:6) MOVQ    DX, (AX)
+        0x00eb 00235 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        PCDATA  $0, $-1
+        0x00eb 00235 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        LEAQ    type:map[int]string(SB), AX
+        0x00f2 00242 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        LEAQ    main..autotmp_3+232(SP), BX
+        0x00fa 00250 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        MOVL    $1, CX
+        0x00ff 00255 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        NOP
+        0x0100 00256 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        CALL    runtime.mapassign_fast64(SB)
+        0x0105 00261 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        MOVQ    $5, 8(AX)
+        0x010d 00269 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        CMPL    runtime.writeBarrier(SB), $0
+        0x0114 00276 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        PCDATA  $0, $-2
+        0x0114 00276 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        JEQ     289
+        0x0116 00278 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        MOVQ    (AX), DX
+        0x0119 00281 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        CALL    runtime.gcWriteBarrier1(SB)
+        0x011e 00286 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        MOVQ    DX, (R11)
+        0x0121 00289 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        LEAQ    go:string."hello"(SB), DX
+        0x0128 00296 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:10)        MOVQ    DX, (AX)
+        0x012b 00299 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        PCDATA  $0, $-1
+        0x012b 00299 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    type:map[int]string(SB), AX
+        0x0132 00306 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        LEAQ    main..autotmp_3+232(SP), BX
+        0x013a 00314 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        MOVL    $2, CX
+        0x013f 00319 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        NOP
+        0x0140 00320 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:13)        CALL    runtime.mapaccess1_fast64(SB)
+        0x0145 00325 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        LEAQ    main..autotmp_2+280(SP), DI
+        0x014d 00333 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        PCDATA  $0, $-2
+        0x014d 00333 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        LEAQ    -32(DI), DI
+        0x0151 00337 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        NOP
+        0x0160 00352 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        DUFFZERO        $331
+        0x0173 00371 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        PCDATA  $0, $-1
+        0x0173 00371 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        LEAQ    type:map[int]string(SB), AX
+        0x017a 00378 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        LEAQ    main..autotmp_3+232(SP), BX
+        0x0182 00386 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        LEAQ    main..autotmp_2+280(SP), CX
+        0x018a 00394 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        PCDATA  $1, $2
+        0x018a 00394 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        CALL    runtime.mapiterinit(SB)
+        0x018f 00399 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        JMP     414
+        0x0191 00401 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        LEAQ    main..autotmp_2+280(SP), AX
+        0x0199 00409 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        CALL    runtime.mapiternext(SB)
+        0x019e 00414 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        CMPQ    main..autotmp_2+280(SP), $0
+        0x01a7 00423 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:16)        JNE     401
+        0x01a9 00425 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:19)        LEAQ    type:map[int]string(SB), AX
+        0x01b0 00432 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:19)        LEAQ    main..autotmp_3+232(SP), BX
+        0x01b8 00440 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:19)        MOVL    $4, CX
+        0x01bd 00445 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:19)        PCDATA  $1, $0
+        0x01bd 00445 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:19)        NOP
+        0x01c0 00448 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:19)        CALL    runtime.mapdelete_fast64(SB)
+        0x01c5 00453 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:20)        ADDQ    $376, SP
+        0x01cc 00460 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:20)        POPQ    BP
+        0x01cd 00461 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:20)        RET
+        0x01ce 00462 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:20)        NOP
+        0x01ce 00462 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $1, $-1
+        0x01ce 00462 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $0, $-2
+        0x01ce 00462 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) CALL    runtime.morestack_noctxt(SB)
+        0x01d3 00467 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) PCDATA  $0, $-1
+        0x01d3 00467 (/home/xuyundong/Github/Golang/GoDemo/map_inner/main.go:3) JMP     0
+        0x0000 4c 8d a4 24 00 ff ff ff 4d 3b 66 10 0f 86 bc 01  L..$....M;f.....
         0x0010 00 00 55 48 89 e5 48 81 ec 78 01 00 00 44 0f 11  ..UH..H..x...D..
         0x0020 bc 24 e8 00 00 00 44 0f 11 bc 24 f8 00 00 00 44  .$....D...$....D
         0x0030 0f 11 bc 24 08 01 00 00 48 8d 7c 24 18 48 8d 7f  ...$....H.|$.H..
         0x0040 d0 48 89 6c 24 f0 48 8d 6c 24 f0 e8 00 00 00 00  .H.l$.H.l$......
         0x0050 48 8b 6d 00 48 8d 44 24 18 48 89 84 24 f8 00 00  H.m.H.D$.H..$...
         0x0060 00 e8 00 00 00 00 89 84 24 f4 00 00 00 48 8d 05  ........$....H..
-        0x0070 00 00 00 00 48 8d 9c 24 e8 00 00 00 b9 01 00 00  ....H..$........
+        0x0070 00 00 00 00 48 8d 9c 24 e8 00 00 00 b9 03 00 00  ....H..$........
         0x0080 00 e8 00 00 00 00 48 c7 40 08 05 00 00 00 83 3d  ......H.@......=
         0x0090 00 00 00 00 00 74 0b 48 8b 10 e8 00 00 00 00 49  .....t.H.......I
         0x00a0 89 13 48 8d 15 00 00 00 00 48 89 10 48 8d 05 00  ..H......H..H...
-        0x00b0 00 00 00 48 8d 9c 24 e8 00 00 00 b9 02 00 00 00  ...H..$.........
-        0x00c0 e8 00 00 00 00 48 8d bc 24 18 01 00 00 48 8d 7f  .....H..$....H..
-        0x00d0 e0 66 0f 1f 84 00 00 00 00 00 66 0f 1f 44 00 00  .f........f..D..
-        0x00e0 48 89 6c 24 f0 48 8d 6c 24 f0 e8 00 00 00 00 48  H.l$.H.l$......H
-        0x00f0 8b 6d 00 48 8d 05 00 00 00 00 48 8d 9c 24 e8 00  .m.H......H..$..
-        0x0100 00 00 48 8d 8c 24 18 01 00 00 e8 00 00 00 00 eb  ..H..$..........
-        0x0110 0d 48 8d 84 24 18 01 00 00 e8 00 00 00 00 48 83  .H..$.........H.
-        0x0120 bc 24 18 01 00 00 00 75 e8 48 81 c4 78 01 00 00  .$.....u.H..x...
-        0x0130 5d c3 e8 00 00 00 00 e9 c4 fe ff ff              ]...........
+        0x00b0 00 00 00 48 8d 9c 24 e8 00 00 00 b9 04 00 00 00  ...H..$.........
+        0x00c0 e8 00 00 00 00 48 c7 40 08 01 00 00 00 83 3d 00  .....H.@......=.
+        0x00d0 00 00 00 00 74 0b 48 8b 10 e8 00 00 00 00 49 89  ....t.H.......I.
+        0x00e0 13 48 8d 15 00 00 00 00 48 89 10 48 8d 05 00 00  .H......H..H....
+        0x00f0 00 00 48 8d 9c 24 e8 00 00 00 b9 01 00 00 00 90  ..H..$..........
+        0x0100 e8 00 00 00 00 48 c7 40 08 05 00 00 00 83 3d 00  .....H.@......=.
+        0x0110 00 00 00 00 74 0b 48 8b 10 e8 00 00 00 00 49 89  ....t.H.......I.
+        0x0120 13 48 8d 15 00 00 00 00 48 89 10 48 8d 05 00 00  .H......H..H....
+        0x0130 00 00 48 8d 9c 24 e8 00 00 00 b9 02 00 00 00 90  ..H..$..........
+        0x0140 e8 00 00 00 00 48 8d bc 24 18 01 00 00 48 8d 7f  .....H..$....H..
+        0x0150 e0 66 0f 1f 84 00 00 00 00 00 66 0f 1f 44 00 00  .f........f..D..
+        0x0160 48 89 6c 24 f0 48 8d 6c 24 f0 e8 00 00 00 00 48  H.l$.H.l$......H
+        0x0170 8b 6d 00 48 8d 05 00 00 00 00 48 8d 9c 24 e8 00  .m.H......H..$..
+        0x0180 00 00 48 8d 8c 24 18 01 00 00 e8 00 00 00 00 eb  ..H..$..........
+        0x0190 0d 48 8d 84 24 18 01 00 00 e8 00 00 00 00 48 83  .H..$.........H.
+        0x01a0 bc 24 18 01 00 00 00 75 e8 48 8d 05 00 00 00 00  .$.....u.H......
+        0x01b0 48 8d 9c 24 e8 00 00 00 b9 04 00 00 00 0f 1f 00  H..$............
+        0x01c0 e8 00 00 00 00 48 81 c4 78 01 00 00 5d c3 e8 00  .....H..x...]...
+        0x01d0 00 00 00 e9 28 fe ff ff                          ....(...
         rel 76+4 t=R_CALL runtime.duffzero+290
         rel 98+4 t=R_CALL runtime.rand32+0
         rel 112+4 t=R_PCREL type:map[int]string+0
         rel 130+4 t=R_CALL runtime.mapassign_fast64+0
         rel 144+4 t=R_PCREL runtime.writeBarrier+-1
         rel 155+4 t=R_CALL runtime.gcWriteBarrier1+0
-        rel 165+4 t=R_PCREL go:string."hello"+0
+        rel 165+4 t=R_PCREL go:string."world"+0
         rel 175+4 t=R_PCREL type:map[int]string+0
-        rel 193+4 t=R_CALL runtime.mapaccess1_fast64+0
-        rel 235+4 t=R_CALL runtime.duffzero+331
-        rel 246+4 t=R_PCREL type:map[int]string+0
-        rel 267+4 t=R_CALL runtime.mapiterinit+0
-        rel 282+4 t=R_CALL runtime.mapiternext+0
-        rel 307+4 t=R_CALL runtime.morestack_noctxt+0
+        rel 193+4 t=R_CALL runtime.mapassign_fast64+0
+        rel 207+4 t=R_PCREL runtime.writeBarrier+-1
+        rel 218+4 t=R_CALL runtime.gcWriteBarrier1+0
+        rel 228+4 t=R_PCREL go:string."!"+0
+        rel 238+4 t=R_PCREL type:map[int]string+0
+        rel 257+4 t=R_CALL runtime.mapassign_fast64+0
+        rel 271+4 t=R_PCREL runtime.writeBarrier+-1
+        rel 282+4 t=R_CALL runtime.gcWriteBarrier1+0
+        rel 292+4 t=R_PCREL go:string."hello"+0
+        rel 302+4 t=R_PCREL type:map[int]string+0
+        rel 321+4 t=R_CALL runtime.mapaccess1_fast64+0
+        rel 363+4 t=R_CALL runtime.duffzero+331
+        rel 374+4 t=R_PCREL type:map[int]string+0
+        rel 395+4 t=R_CALL runtime.mapiterinit+0
+        rel 410+4 t=R_CALL runtime.mapiternext+0
+        rel 428+4 t=R_PCREL type:map[int]string+0
+        rel 449+4 t=R_CALL runtime.mapdelete_fast64+0
+        rel 463+4 t=R_CALL runtime.morestack_noctxt+0
 go:cuinfo.producer.<unlinkable> SDWARFCUINFO dupok size=0
         0x0000 72 65 67 61 62 69                                regabi
 go:cuinfo.packagename.main SDWARFCUINFO dupok size=0
@@ -260,6 +318,10 @@ type:map[int]string SRODATA dupok size=88
         rel 56+8 t=R_ADDR type:string+0
         rel 64+8 t=R_ADDR type:noalg.map.bucket[int]string+0
         rel 72+8 t=R_ADDR runtime.memhash64·f+0
+go:string."world" SRODATA dupok size=5
+        0x0000 77 6f 72 6c 64                                   world
+go:string."!" SRODATA dupok size=1
+        0x0000 21                                               !
 go:string."hello" SRODATA dupok size=5
         0x0000 68 65 6c 6c 6f                                   hello
 runtime.gcbits.ff00000000000000 SRODATA dupok size=8
@@ -268,9 +330,9 @@ runtime.gcbits.2c00000000000000 SRODATA dupok size=8
         0x0000 2c 00 00 00 00 00 00 00                          ,.......
 gclocals·ykHN0vawYuq1dUW4zEe2gA== SRODATA dupok size=8
         0x0000 03 00 00 00 00 00 00 00                          ........
-gclocals·MxXDhV4rNFJBGgpTDW5ijQ== SRODATA dupok size=26
+gclocals·sRFbzDWFn8PpTBbw2tk2zQ== SRODATA dupok size=26
         0x0000 03 00 00 00 2c 00 00 00 00 00 00 00 00 00 00 00  ....,...........
-        0x0010 00 b0 00 00 00 00 00 00 ff 00                    ..........
+        0x0010 00 b0 00 00 00 00 00 b0 ff 00                    ..........
 main.main.stkobj SRODATA static size=56
         0x0000 03 00 00 00 00 00 00 00 a0 fe ff ff d0 00 00 00  ................
         0x0010 d0 00 00 00 00 00 00 00 70 ff ff ff 30 00 00 00  ........p...0...
