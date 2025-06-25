@@ -9,14 +9,12 @@ import (
 	"net/url"
 	"sort"
 	"strings"
-	"time"
 )
 
 const SignSecret = "secretkeyfortest"
 
 func generateSignStr(params map[string]string) (string, string) {
 	var keys []string
-	time.Parse()
 	for key, _ := range params {
 		if "sign" == key {
 			continue
