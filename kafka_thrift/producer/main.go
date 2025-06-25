@@ -1,12 +1,14 @@
 package main
 
 import (
+	"context"
+	"time"
+
 	"bwdemo/kafka_thrift/gen-go/rpclog"
 	"bwdemo/kafka_thrift/logger"
-	"context"
+
 	"github.com/apache/thrift/lib/go/thrift"
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"time"
 )
 
 func main() {

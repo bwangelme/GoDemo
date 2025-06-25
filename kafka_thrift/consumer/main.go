@@ -1,16 +1,18 @@
 package main
 
 import (
-	"bwdemo/kafka_thrift/gen-go/rpclog"
-	"bwdemo/kafka_thrift/logger"
 	"context"
-	"github.com/apache/thrift/lib/go/thrift"
-	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
-	"github.com/sirupsen/logrus"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
+
+	"bwdemo/kafka_thrift/gen-go/rpclog"
+	"bwdemo/kafka_thrift/logger"
+
+	"github.com/apache/thrift/lib/go/thrift"
+	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
+	"github.com/sirupsen/logrus"
 )
 
 func main() {
