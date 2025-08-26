@@ -7,6 +7,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"os"
 	"time"
 )
 
@@ -17,7 +18,41 @@ type PackageConfig struct {
 	TrendCardCount   int    `json:"trend_card_count"`
 }
 
+const (
+	data = `H4sIAAAAAAAA/7yRS07DMBCG9z2F5XWBOI7jJFtuACwrRX7MVBapbfWBWlW9O3JQhZUWJKAiS/+PzMx3nBFCCH0KYfWyVojOPKq1pR35EEbRhJ3f0o6w+eebVYcN7UiRPQEimG2PLsVpdOaBQWsbQIG6RBAVL7jQwIVl2Iq6UUDz9D4qPyaPC7oBb/vtIcKCdsUpt/2yfRmC3fRerSClp9teGNOvaUcEv6r0g9IwpKLnCMap4aJkHXZxcjDnLewnFxvgbezJfVGZ1/6aOQlqCefZykzaeZemYVLUZSE5Z7Kp7or7YvrRMXKa58zB2xsSN7KsjATUtba6EdgK1oKW2gosayj/SPwn7deIn3f9knd1e97sf3iLb3jPTu8BAAD//8OVyVPmAwAA`
+)
+
 func main() {
+	// Check command line arguments
+	if len(os.Args) > 1 {
+		switch os.Args[1] {
+		case "decompress":
+			if len(os.Args) < 3 {
+				fmt.Println("Usage: go run main.go decompress <base64_data>")
+				fmt.Println("Example: go run main.go decompress", data)
+				return
+			}
+
+			// Decompress the provided base64 data
+			compressedData := os.Args[2]
+			result, err := UnCompress(compressedData)
+			if err != nil {
+				fmt.Printf("Error decompressing: %v\n", err)
+				return
+			}
+			fmt.Println("Decompressed JSON:")
+			fmt.Println(result)
+			return
+
+		default:
+			fmt.Println("Unknown command. Available commands:")
+			fmt.Println("  decompress <base64_data> - Decompress base64 encoded data")
+			fmt.Println("  demo                    - Decompress the demo data")
+			return
+		}
+	}
+
+	// Default behavior: Generate SQL statements
 	// Define the package configurations from the table
 	packageConfigs := []PackageConfig{
 		{Name: "agency-task-recruit_host-1host", TrafficCardCount: 1, TrendCardCount: 1},
@@ -68,8 +103,8 @@ func generatePackageJSON(config PackageConfig) string {
 	trendUni := fmt.Sprintf("%d-0.00000000000000000", milliseconds+1) // Add 1 to make them different
 
 	// Create a map with two items: RoomTrafficCard and RoomTrendCard
-	goods := map[string]interface{}{
-		"RoomTrafficCard": map[string]interface{}{
+	goods := []interface{}{
+		map[string]interface{}{
 			"uni":              trafficUni,
 			"goods_type":       53,
 			"count":            config.TrafficCardCount,
@@ -85,7 +120,7 @@ func generatePackageJSON(config PackageConfig) string {
 			"effect_fid":       "pic/1e9d8ef5fb2fe543035be35d1f9568ae",
 			"expand":           "{\"send_type\":0}",
 		},
-		"RoomTrendCard": map[string]interface{}{
+		map[string]interface{}{
 			"uni":              trendUni,
 			"goods_type":       54,
 			"count":            config.TrendCardCount,
@@ -104,7 +139,7 @@ func generatePackageJSON(config PackageConfig) string {
 	}
 
 	// Marshal to JSON with proper formatting
-	jsonBytes, err := json.MarshalIndent(goods, "", "    ")
+	jsonBytes, err := json.Marshal(goods)
 	if err != nil {
 		return "{}"
 	}
