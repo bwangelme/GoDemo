@@ -56,10 +56,10 @@ func main() {
 	// Define the package configurations from the table
 	packageConfigs := []PackageConfig{
 		{Name: "agency-task-recruit_host-1host", TrafficCardCount: 1, TrendCardCount: 1},
-		{Name: "agency-task-recruit_host-11host", TrafficCardCount: 3, TrendCardCount: 3},
-		{Name: "agency-task-recruit_host-31host", TrafficCardCount: 5, TrendCardCount: 5},
-		{Name: "agency-task-recruit_host-51host", TrafficCardCount: 10, TrendCardCount: 10},
-		{Name: "agency-task-recruit_host-81host", TrafficCardCount: 15, TrendCardCount: 15},
+		{Name: "agency-task-recruit_host-11host", TrafficCardCount: 2, TrendCardCount: 2},
+		{Name: "agency-task-recruit_host-31host", TrafficCardCount: 2, TrendCardCount: 2},
+		{Name: "agency-task-recruit_host-51host", TrafficCardCount: 5, TrendCardCount: 5},
+		{Name: "agency-task-recruit_host-81host", TrafficCardCount: 5, TrendCardCount: 5},
 	}
 
 	// Debug: Print the first entry's JSON
@@ -68,7 +68,8 @@ func main() {
 	fmt.Println(firstJSON)
 	fmt.Println()
 
-	// Generate SQL insert statements
+	// Generate INSERT statements
+	fmt.Println("-- INSERT statements")
 	fmt.Println("INSERT INTO audio_reward.reward_package_cfg_info (`region`,`package_type`,`compressed`,`last_operator_id`,`package_name`,`package_json`) VALUES")
 
 	for i, config := range packageConfigs {
@@ -89,6 +90,25 @@ func main() {
 		}
 
 		fmt.Printf("('TR',2,1,289,'%s', '%s')%s\n", config.Name, compressedJSON, comma)
+	}
+
+	fmt.Println()
+
+	// Generate UPDATE statements
+	fmt.Println("-- UPDATE statements")
+	for _, config := range packageConfigs {
+		// Generate package JSON based on the configuration
+		packageJSON := generatePackageJSON(config)
+
+		// Compress the JSON
+		compressedJSON, err := Compress(packageJSON)
+		if err != nil {
+			fmt.Printf("Error compressing JSON for %s: %v\n", config.Name, err)
+			continue
+		}
+
+		// Generate UPDATE statement
+		fmt.Printf("UPDATE audio_reward.reward_package_cfg_info SET `package_json` = '%s' WHERE `package_name` = '%s';\n", compressedJSON, config.Name)
 	}
 }
 
