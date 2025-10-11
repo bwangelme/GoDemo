@@ -5,10 +5,26 @@ import (
 	"fmt"
 	"reflect"
 	"unsafe"
+
+	"github.com/spf13/cast"
 )
 
 func main() {
-	EmptySlice()
+	SliceOver()
+}
+
+func SliceOver() {
+	// 测试，访问子切片时，越界会不会 panic
+	// go1.25.1 测试后发现不会越界
+	fmt.Println("Output log message")
+	for _, args := range [][]interface{}{
+		{"hello, %v\n"},
+		{"hello, %v\n", "world"},
+		{"hello, %v + %v = %v\n", 40, 2, 40 + 2},
+	} {
+		fmt.Printf(cast.ToString(args[0]), args[1:]...)
+	}
+	fmt.Println("Output end")
 }
 
 func EmptySlice() {
