@@ -6,10 +6,14 @@ import (
 	"github.com/pkg/errors"
 )
 
-// 使用 pkg/errors 追中 error 的栈信息
+var (
+	OriginErr = errors.New("original error")
+)
+
+// 底层的 error，上层使用 errors.Is 直接判断就可以
 func main() {
 	err := topFunction()
-	if err != nil {
+	if errors.Is(err, OriginErr) {
 		fmt.Printf("%+v\n", err)
 	}
 }
@@ -17,7 +21,7 @@ func main() {
 func topFunction() error {
 	err := middleFunction()
 	if err != nil {
-		return errors.WithMessage(err, "error in topFunction")
+		return fmt.Errorf("efg %w", err)
 	}
 	return nil
 }
@@ -25,11 +29,11 @@ func topFunction() error {
 func middleFunction() error {
 	err := deeperFunction()
 	if err != nil {
-		return errors.WithMessage(err, "error in middleFunction")
+		return fmt.Errorf("abc %w", err)
 	}
 	return nil
 }
 
 func deeperFunction() error {
-	return errors.New("original error")
+	return OriginErr
 }
